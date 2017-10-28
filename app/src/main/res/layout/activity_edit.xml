@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="10"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_activity_edit"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0.5dp"
+        >
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <EditText
+        android:id="@+id/edittext_title_editactivity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0.5dp"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-condensed"
+        android:hint="Title"
+        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:textColor="#212121"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/edittext_content_editactivity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:gravity="top"
+        android:textSize="20sp"
+        android:hint="Write something"
+        android:padding="10dp"
+        android:textColor="#212121" />
+
+
+</LinearLayout>

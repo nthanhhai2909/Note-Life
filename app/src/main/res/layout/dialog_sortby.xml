@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="4"
+    android:layout_marginLeft="150dp"
+    android:layout_marginRight="150dp"
+    android:layout_marginBottom="150dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="150dp"
+    >
+    <RadioGroup
+        android:weightSum="4"
+        android:layout_weight="4"
+        android:id="@+id/radiobutton_sortby_diglog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/sortby_datecreate_increment_toolbar_Activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Sort by date create increment"/>
+
+        <RadioButton
+            android:id="@+id/sortby_datecreate_decrement_toolbar_Activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Sort by date create decrement"/>
+
+        <RadioButton
+            android:id="@+id/sortby_dateupdate_increment_toolbar_Activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Sort by date update increment"/>
+
+
+        <RadioButton
+            android:id="@+id/sortby_dateupdate_decrement_toolbar_Activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Sort by date update decrement"/>
+    </RadioGroup>
+
+</LinearLayout>

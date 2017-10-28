@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#ff1a1a"
+    android:weightSum="7">
+
+    <TextView
+        android:id="@+id/textview_title_recycleview_acitivity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:fontFamily="sans-serif-condensed"
+        android:hint="Title"
+        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp" />
+
+    <TextView
+        android:id="@+id/textview_content_recycleview_activity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="top"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:fontFamily="sans-serif-condensed"
+        android:hint="Write something..."
+        />
+    <TextView
+        android:id="@+id/textview_datecreate_recycleview_activity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="5sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+    <TextView
+        android:id="@+id/textview_datelastupdate_recycleview_activity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="5sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
+
+</LinearLayout>

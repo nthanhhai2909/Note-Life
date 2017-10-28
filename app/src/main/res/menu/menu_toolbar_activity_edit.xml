@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/list_color"
+        android:title="color"
+        app:showAsAction="always"
+        >
+        <menu>
+            <item
+                android:id="@+id/color_green"
+                android:title="Green"
+                android:icon="@drawable/color_green"
+                app:showAsAction="always"
+                >
+            </item>
+
+            <item
+                android:id="@+id/color_blue"
+                android:title="Blue"
+                android:icon="@drawable/color_blue"
+                app:showAsAction="always"
+                >
+            </item>
+
+            <item
+                android:id="@+id/color_purple"
+                android:title="Purple"
+                android:icon="@drawable/color_purple"
+                app:showAsAction="always"
+                >
+            </item>
+
+            <item
+                android:id="@+id/color_pink"
+                android:title="Pink"
+                android:icon="@drawable/color_pink"
+                app:showAsAction="always"
+                >
+            </item>
+
+            <item
+                android:id="@+id/color_red"
+                android:title="Red"
+                android:icon="@drawable/color_red"
+                app:showAsAction="always"
+                >
+            </item>
+
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/save_activity_edit"
+        android:title="save"
+        app:showAsAction="always"></item>
+</menu>

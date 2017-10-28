@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NoteLifeAdvance</string>
+
+
+    <string-array name="list_color">
+        <item>Red</item>
+        <item>Blue</item>
+    </string-array>
+</resources>
