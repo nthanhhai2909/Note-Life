@@ -252,7 +252,18 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
     }
     @Override
     public void onBackPressed() {
-        // your code.
-        this.finish();
+        new AlertDialog.Builder(this).setTitle("Exit")
+                .setMessage("Are you sure?")
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).setNegativeButton("no", null).show();;
     }
 }
