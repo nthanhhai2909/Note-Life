@@ -174,7 +174,9 @@ public class EditActivity extends AppCompatActivity {
                         else{
                             updateNote();
                         }
-                        startActivity(new Intent(getApplication(), MainActivity.class));
+                        Intent intent = new Intent(getApplication(), MainActivity.class);
+                       // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

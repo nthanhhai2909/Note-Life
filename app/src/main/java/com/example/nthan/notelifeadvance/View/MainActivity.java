@@ -226,7 +226,6 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date _date = sdf.parse(date);
             time = _date.getTime();
-            Toast.makeText(this, String.valueOf(time), Toast.LENGTH_SHORT).show();
         }
 
         catch (ParseException p){p.printStackTrace();}
@@ -243,9 +242,13 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
 
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
+                        System.exit(0);
+
+
+
+
                     }
                 }).setNegativeButton("No", null).show();;
     }
