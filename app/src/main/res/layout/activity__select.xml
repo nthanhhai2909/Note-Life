@@ -9,6 +9,7 @@
         android:id="@+id/toolbar_activity_select"
         android:layout_height="0dp"
         android:layout_width="match_parent"
+        android:background="#004D40"
         android:layout_weight="1"
         >
     </android.support.v7.widget.Toolbar>

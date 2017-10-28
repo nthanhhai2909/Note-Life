@@ -13,7 +13,7 @@
         android:layout_weight="1"
         app:title="Life Note"
         android:padding="2dp"
-        android:background="#fff9c4"
+        android:background="#004D40"
         android:layout_marginBottom="0.5dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -39,7 +39,7 @@
             android:layout_height="50dp"
             android:layout_width="50dp"
             android:src="@drawable/addicon"
-            app:backgroundTint="#fff9c4"
+            app:backgroundTint="#004D40"
             android:layout_margin="20dp"
             android:layout_gravity="bottom|right"
             >

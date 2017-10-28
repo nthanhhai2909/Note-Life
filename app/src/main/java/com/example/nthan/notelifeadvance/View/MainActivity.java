@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -177,39 +179,31 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
 
         final RadioGroup radioGroup = (RadioGroup)alertLayout.findViewById(R.id.radiobutton_sortby_diglog);
 
+        final AlertDialog dig = alert.create();
+        dig.show();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-
-                Map<String, Long> mapCreate = new ArrayMap<String, Long>();
-                Map<String, Long> mapUpdate = new ArrayMap<String, Long>();
-                for(int i = 0; i < listNote.size(); i++){
-
-                    mapCreate.put(String.valueOf(listNote.get(i).getId()),
-                            convertDateToLongTime(listNote.get(i).getDate_create()));
-                    mapUpdate.put(String.valueOf(listNote.get(i).getId()),
-                            convertDateToLongTime(listNote.get(i).getDate_Update_last()));
-                }
-
                 switch (checkedId){
                     case R.id.sortby_datecreate_decrement_toolbar_Activity_main:
-                        List<Map.Entry<String, Long>> list = sortDate(mapCreate);
-                        List<Note> listNoteSort = new ArrayList<Note>();
-                        for(Map.Entry<String, Long> entry: list){
-                            listNoteSort.add(notePresenter.getNoteByID(Integer.parseInt(entry.getKey())));
-                        }
-                        initRecycleView(listNoteSort);
-                        Toast.makeText(MainActivity.this, String.valueOf(convertDateToLongTime(
-                                listNote.get(0).getDate_create())), Toast.LENGTH_SHORT).show();
+                        List<Note> list = sortNoteDateCreateDecrement();
+                        initRecycleView(list);
+                        dig.hide();
                         break;
                     case R.id.sortby_datecreate_increment_toolbar_Activity_main:
-
-                        Toast.makeText(MainActivity.this, String.valueOf(convertDateToLongTime(
-                                listNote.get(0).getDate_Update_last())), Toast.LENGTH_SHORT).show();
+                        list = sortNoteDateCreateIncrement();
+                        initRecycleView(list);
+                        dig.hide();
                         break;
                     case R.id.sortby_dateupdate_decrement_toolbar_Activity_main:
+                        list = sortNoteDateUpdateDecrement();
+                        initRecycleView(list);
+                        dig.hide();
                         break;
                     case R.id.sortby_dateupdate_increment_toolbar_Activity_main:
+                        list = sortNoteDateUpdateIncrement();
+                        initRecycleView(list);
+                        dig.hide();
                         break;
                 }
             }
@@ -223,8 +217,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
 //
 //            }
 //        });
-        AlertDialog dig = alert.create();
-        dig.show();
+
     }
 
     public long convertDateToLongTime(String date){
@@ -233,28 +226,18 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date _date = sdf.parse(date);
             time = _date.getTime();
+            Toast.makeText(this, String.valueOf(time), Toast.LENGTH_SHORT).show();
         }
+
         catch (ParseException p){p.printStackTrace();}
         return time;
     }
 
-    public  List<Map.Entry<String, Long>> sortDate(Map<String, Long> date){
-        Map<String, Long> dateSort = date;
-        Set<Map.Entry<String, Long>> set = dateSort.entrySet();
-        List<Map.Entry<String, Long>> list = new ArrayList<Map.Entry<String, Long>>(set);
-        Collections.sort(list, new Comparator<Map.Entry<String, Long>>() {
-            @Override
-            public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
-                return (o2.getValue().compareTo(o1.getValue()));
-            }
-        });
-        return list;
-    }
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this).setTitle("Exit")
                 .setMessage("Are you sure?")
-                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -264,6 +247,121 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
                         startActivity(intent);
                         finish();
                     }
-                }).setNegativeButton("no", null).show();;
+                }).setNegativeButton("No", null).show();;
+    }
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> e1, Map.Entry<K, V> e2) {
+                return (e1.getValue()).compareTo(e2.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    public List<Note> sortNoteDateCreateIncrement(){
+        Map<String, Long> map = new LinkedHashMap<>();
+        List<Note> list = new ArrayList<Note>();
+        if (!listNote.isEmpty()) {
+            for (int i = 0; i < listNote.size(); i++) {
+                map.put(String.valueOf(listNote.get(i).getId()),
+                        convertDateToLongTime(listNote.get(i).getDate_create()));
+            }
+            map = sortByValue(map);
+
+        }
+        if (!map.isEmpty()) {
+            List<String> key = new ArrayList<String>(map.keySet());
+            if (!key.isEmpty()) {
+                for (int i = 0; i < key.size(); i ++) {
+                    list.add(notePresenter.getNoteByID(Integer.parseInt(key.get(i))));
+                }
+            }
+        }
+        return list;
+    }
+    public List<Note> sortNoteDateCreateDecrement() {
+        Map<String, Long> map = new LinkedHashMap<>();
+        List<Note> list = new ArrayList<Note>();
+        if (!listNote.isEmpty()) {
+            for (int i = 0; i < listNote.size(); i++) {
+                map.put(String.valueOf(listNote.get(i).getId()),
+                        convertDateToLongTime(listNote.get(i).getDate_create()));
+            }
+            map = sortByValue(map);
+
+        }
+        if (!map.isEmpty()) {
+            List<String> key = new ArrayList<String>(map.keySet());
+
+
+            if (!key.isEmpty()) {
+                for (int i = key.size() - 1; i >= 0; i--) {
+                    list.add(notePresenter.getNoteByID(Integer.parseInt(key.get(i))));
+                }
+            }
+        }
+        return list;
+    }
+    public List<Note> sortNoteDateUpdateIncrement(){
+
+        Map<String, Long> map = new LinkedHashMap<>();
+        List<Note> list = new ArrayList<Note>();
+        if (!listNote.isEmpty()) {
+            for (int i = 0; i < listNote.size(); i++) {
+                String dateUpdate = listNote.get(i).getDate_Update_last();
+                if(dateUpdate.equals("Not update yet")){
+                    dateUpdate = "0000/00/00 00:00:00";
+                }
+                map.put(String.valueOf(listNote.get(i).getId()),
+                        convertDateToLongTime(dateUpdate));
+            }
+            map = sortByValue(map);
+
+        }
+        if (!map.isEmpty()) {
+            List<String> key = new ArrayList<String>(map.keySet());
+            if (!key.isEmpty()) {
+                for (int i = 0; i < key.size(); i ++) {
+
+                    list.add(notePresenter.getNoteByID(Integer.parseInt(key.get(i))));
+                }
+            }
+        }
+        return list;
+    }
+    public List<Note> sortNoteDateUpdateDecrement(){
+
+        Map<String, Long> map = new LinkedHashMap<>();
+        List<Note> list = new ArrayList<Note>();
+        if (!listNote.isEmpty()) {
+            for (int i = 0; i < listNote.size(); i++) {
+                String dateUpdate = listNote.get(i).getDate_Update_last();
+                if(dateUpdate.equals("Not update yet")){
+                    dateUpdate = "0000/00/00 00:00:00";
+                }
+                map.put(String.valueOf(listNote.get(i).getId()),
+                        convertDateToLongTime(dateUpdate));
+            }
+            map = sortByValue(map);
+
+        }
+        if (!map.isEmpty()) {
+            List<String> key = new ArrayList<String>(map.keySet());
+            if (!key.isEmpty()) {
+                for (int i = key.size() -1; i>= 0; i--) {
+                    list.add(notePresenter.getNoteByID(Integer.parseInt(key.get(i))));
+                }
+            }
+        }
+        return list;
+
     }
 }
