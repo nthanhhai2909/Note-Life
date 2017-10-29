@@ -4,12 +4,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import com.example.nthan.notelifeadvance.Model.Note;
 import com.example.nthan.notelifeadvance.Presenter.NotePresenter;
 import com.example.nthan.notelifeadvance.R;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +47,8 @@ public class EditActivity extends AppCompatActivity {
     private String color = Note.NOTE_COLOR_PURPLE;
     private EditText editTextTitle;
     private EditText editTextContent;
+
+    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +86,26 @@ public class EditActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar_activity_edit, menu);
 
-        // Configure the search info and add any event listeners...
+         MenuItem shareItem = menu.findItem(R.id.share_note_editactivity);
+        ShareActionProvider myShareActionProvider =
+                (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
 
+        Intent myShareIntent = new Intent(Intent.ACTION_SEND);
+        myShareIntent.setType("text/plain");
+        myShareIntent.putExtra(Intent.EXTRA_TEXT, editTextTitle.getText().toString() +
+                "\n" +
+                editTextContent.getText().toString());
+        myShareActionProvider.setShareIntent(myShareIntent);
+        //startActivity(Intent.createChooser(myShareIntent, "Share via"));
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public void shareNote(String note){
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, note);
+        shareIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareIntent, "Choose sharing method"));
     }
 
     @Override
@@ -123,11 +145,13 @@ public class EditActivity extends AppCompatActivity {
                 //Toast.makeText(this, "backHome", Toast.LENGTH_SHORT).show();
                 handlingHomeBack();
                 return true;
+            case R.id.share_note_editactivity:
+
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 

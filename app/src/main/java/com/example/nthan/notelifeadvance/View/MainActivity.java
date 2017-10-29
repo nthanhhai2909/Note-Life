@@ -246,9 +246,6 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
                         finish();
                         System.exit(0);
 
-
-
-
                     }
                 }).setNegativeButton("No", null).show();;
     }

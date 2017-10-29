@@ -3,8 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/share_note_editactivity"
+        android:title="share"
+        android:icon="@drawable/share"
+        app:showAsAction="always"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        >
+
+    </item>
+    <item
         android:id="@+id/list_color"
         android:title="color"
+        android:icon="@drawable/select_color"
         app:showAsAction="always"
         >
         <menu>
