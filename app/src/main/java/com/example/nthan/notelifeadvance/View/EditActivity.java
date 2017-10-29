@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -107,6 +108,10 @@ public class EditActivity extends AppCompatActivity {
         shareIntent.setType("text/plain");
         startActivity(Intent.createChooser(shareIntent, "Choose sharing method"));
     }
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -212,6 +217,7 @@ public class EditActivity extends AppCompatActivity {
 
         builder.show();
     }
+
 
 
     @Override

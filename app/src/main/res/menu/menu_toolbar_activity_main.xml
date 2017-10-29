@@ -3,6 +3,13 @@
 
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
+        android:id="@+id/voice_search"
+        android:title="voice_search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_settings_voice_black_24dp"
+
+        ></item>
+    <item
         android:id="@+id/searchview_toolbar_activity_main"
         android:title="Search"
         app:showAsAction="always"

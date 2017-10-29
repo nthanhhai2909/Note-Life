@@ -2,6 +2,7 @@ package com.example.nthan.notelifeadvance.View;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.util.ArrayMap;
@@ -77,6 +78,31 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
 
     }
 
+    private static final int SPEECH_REQUEST_CODE = 0;
+    // Create an intent that can start the Speech Recognizer activity
+    private void displaySpeechRecognizer() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        // Start the activity, the intent will be populated with the speech text
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    // This callback is invoked when the Speech Recognizer returns.
+    // This is where you process the intent and extract the speech text from the intent.
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = results.get(0);
+            initRecycleView(searchTextInData(spokenText));
+            // Do something with spokenText
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -85,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
                 return true;
             case R.id.sortby_toolbar_Activity_main:
                 displayAlertDialog();
+                return true;
+            case R.id.voice_search:
+                displaySpeechRecognizer();
                 return true;
 
 
