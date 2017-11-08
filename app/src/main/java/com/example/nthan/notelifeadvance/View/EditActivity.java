@@ -151,7 +151,6 @@ public class EditActivity extends AppCompatActivity {
                 handlingHomeBack();
                 return true;
             case R.id.share_note_editactivity:
-
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -204,14 +203,14 @@ public class EditActivity extends AppCompatActivity {
                             updateNote();
                         }
                         Intent intent = new Intent(getApplication(), MainActivity.class);
-                       // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+                        EditActivity.super.onBackPressed();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
-                        startActivity(new Intent(getApplication(), MainActivity.class));
+                        EditActivity.super.onBackPressed();
+
                     }
                 });
 
@@ -224,6 +223,7 @@ public class EditActivity extends AppCompatActivity {
     public void onBackPressed() {
         // your code.
         handlingHomeBack();
+
     }
     public void setNoteForScreen(Note note){
 

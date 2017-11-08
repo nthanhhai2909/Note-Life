@@ -238,15 +238,6 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
             }
         });
 
-//        alert.setNegativeButton("Cancel", null);
-//        alert.setPositiveButton("OK", new DialogInterface.OnClickListener(){
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
-
     }
 
     public long convertDateToLongTime(String date){
@@ -274,9 +265,11 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
                         startActivity(intent);
                         finish();
                         System.exit(0);
+                        //finish();
 
                     }
-                }).setNegativeButton("No", null).show();;
+                })
+                .setNegativeButton("No", null).show();;
     }
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
