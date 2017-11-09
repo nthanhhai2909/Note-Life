@@ -11,7 +11,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -160,13 +162,9 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.Recyc
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleview_activity_main);
         recyclerView.setHasFixedSize(true);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1,
-                StaggeredGridLayoutManager.VERTICAL);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-                staggeredGridLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
-
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         noteAdapter = new NoteAdapter(list, getApplicationContext(), this, this);
         recyclerView.setAdapter(noteAdapter);
     }
